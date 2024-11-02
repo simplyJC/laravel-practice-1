@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     //
-    public function  register (){
-        dd( 'ok' );
+    public function  register (Request $request) {
+        dd( $request -> username );
     }
 }
