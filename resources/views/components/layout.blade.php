@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>{{ env('APP_NAME') }} </title>
 </head>
 <body class="bg-gray-100  h-screen w-full ">
@@ -18,9 +19,28 @@
         <!-- Navigation Links for Desktop -->
         <div class="hidden md:flex space-x-6">
             <a href="{{route('home');}}" class="text-white hover:text-blue-200">Home</a>
-            <a href="{{route('register')}}" class="text-white hover:text-blue-200">Register</a>
-            <a href="{{route('login')}}" class="text-white hover:text-blue-200">Login</a>
-            <a href="/contact" class="text-white hover:text-blue-200">Contact</a>
+            @guest
+                <a href="{{route('register')}}" class="text-white hover:text-blue-200">Register</a>
+                <a href="{{route('login')}}" class="text-white hover:text-blue-200">Login</a>
+            @endguest
+            @auth
+                {{-- Profile Picture --}}
+                <div class="relative grid place-items-center" x-data="{ dropdownOpen: false }">
+                    <button type="button" class="route-btn" @click="dropdownOpen = !dropdownOpen">
+                        <img src="https://picsum.photos/200/200" alt="profile picture" class="w-8 h-8 rounded-full">
+                    </button>
+                     {{--  Dropdown Menu --}}
+                    <div class="bg-white shadow-lg absolute top-10 right-0 p-2 rounded-lg" x-show="dropdownOpen" @click.outside="dropdownOpen = false">
+                        <p  class="text-sm pl-4  border-b border-gray-300">{{ Auth::user()->username }}</p>
+                        <a href="{{route('dashboard');}}" class="block px-4  hover:bg-gray-100">Dashboard</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="block px-4  hover:bg-gray-100">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            @endauth
+            
         </div>
 
         <!-- Mobile Menu Button -->

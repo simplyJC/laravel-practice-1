@@ -35,13 +35,21 @@ class AuthController extends Controller
 
        
         if(Auth::attempt($fields, $request->remember)) {
-            return redirect()->route('home');
+            return redirect()->intended('dashboard');
         } else {
             return back()->withErrors([
                 'failed' => 'The provided credentials are incorrect'
             ]);
         }
-            
+           
+        
+    }
+    //Logout user
+    public function logout (Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('home');
     }
 }
 

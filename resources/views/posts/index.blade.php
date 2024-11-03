@@ -7,7 +7,7 @@
             {{ Auth::user()->username }}
             @endauth
             @guest 
-            Guest 
+            Guest Login
             @endguest</h2>
             <p class="text-xl mb-8">This is a beautiful welcome page built with Tailwind CSS.</p>
             <a href="#" class="bg-white text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider hover:bg-gray-200">

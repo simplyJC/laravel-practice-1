@@ -35,7 +35,7 @@
             
             <div class="mb-4">
                 <label for="password_confirmation">Confirm Password</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" class="w-full rounded-lg border border-gray-200 p-3 text-sm @error('password_confirmation')@enderror" ="Confirm your password"  />
+                <input type="password" name="password_confirmation" id="password_confirmation" class="w-full rounded-lg border border-gray-200 p-3 text-sm @error('password_confirmation')@enderror" placeholder="Confirm your password"  />
             </div>
             <button class="w-full rounded-lg bg-blue-500 py-3 px-3 text-center text-sm font-medium text-white" type="submit">Register</button>
         </form>
