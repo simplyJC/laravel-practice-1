@@ -2,7 +2,13 @@
  <!-- Hero Section -->
     <section class="bg-gray-800 text-white py-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-2">Welcome to My Laravel App</h2>
+            <h2 class="text-4xl font-bold mb-2">Welcome 
+            @auth
+            {{ Auth::user()->username }}
+            @endauth
+            @guest 
+            Guest 
+            @endguest</h2>
             <p class="text-xl mb-8">This is a beautiful welcome page built with Tailwind CSS.</p>
             <a href="#" class="bg-white text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider hover:bg-gray-200">
                 Get Started

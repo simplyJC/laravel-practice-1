@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>{{ env('APP_NAME') }} </title>
 </head>
-<body class="bg-gray-100  h-screen w-full">
+<body class="bg-gray-100  h-screen w-full ">
     <nav class="bg-blue-600 p-4 shadow-lg">
     <div class="container mx-auto flex items-center justify-between">
         <!-- Logo or Brand Name -->
@@ -19,7 +19,7 @@
         <div class="hidden md:flex space-x-6">
             <a href="{{route('home');}}" class="text-white hover:text-blue-200">Home</a>
             <a href="{{route('register')}}" class="text-white hover:text-blue-200">Register</a>
-            <a href="/services" class="text-white hover:text-blue-200">Services</a>
+            <a href="{{route('login')}}" class="text-white hover:text-blue-200">Login</a>
             <a href="/contact" class="text-white hover:text-blue-200">Contact</a>
         </div>
 
