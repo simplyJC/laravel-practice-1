@@ -21,7 +21,7 @@ class AuthController extends Controller
         //Login
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->intended('dashboard');
        // dd('ok' );
     }
 
@@ -49,7 +49,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('home');
+        return redirect()->route('posts.index');
     }
 }
 

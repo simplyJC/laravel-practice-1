@@ -1,6 +1,7 @@
 <x-layout>
-<h1 class="text-3xl text-center">Login Account</h1>
-<div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+
+<div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 ">
+    <h1 class="text-3xl text-center">Login Account</h1>
     <div class="mx-auto max-w-lg">
         <form action="{{ route('login') }}" method="POST" class="mb-0 space-y-4">
             @csrf
@@ -33,7 +34,7 @@
             @error('failed')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p> 
             @enderror
-            <button class="w-full rounded-lg bg-blue-500 py-3 px-3 text-center text-sm font-medium text-white" type="submit">Register</button>
+            <button class="w-full rounded-lg bg-blue-500 py-3 px-3 text-center text-sm font-medium text-white" type="submit">Login</button>
         </form>
     </div>
 </div>

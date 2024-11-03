@@ -9,7 +9,7 @@
     <title>{{ env('APP_NAME') }} </title>
 </head>
 <body class="bg-gray-100  h-screen w-full ">
-    <nav class="bg-blue-600 p-4 shadow-lg">
+    <nav class="bg-blue-600 p-4 shadow-lg ">
     <div class="container mx-auto flex items-center justify-between">
         <!-- Logo or Brand Name -->
         <div class="text-white text-2xl font-semibold">
@@ -18,7 +18,7 @@
 
         <!-- Navigation Links for Desktop -->
         <div class="hidden md:flex space-x-6">
-            <a href="{{route('home');}}" class="text-white hover:text-blue-200">Home</a>
+            <a href="{{route('posts.index');}}" class="text-white hover:text-blue-200">Home</a>
             @guest
                 <a href="{{route('register')}}" class="text-white hover:text-blue-200">Register</a>
                 <a href="{{route('login')}}" class="text-white hover:text-blue-200">Login</a>
