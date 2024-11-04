@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+
 use App\Models\Post;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -14,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->paginate(5);
         // dd($posts);
         return view('posts.index', ['posts' => $posts]);
     }
@@ -30,9 +32,18 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
         //
+        // dd(Auth::user()->posts());
+        $fields = $request -> validate([
+            'title' => ['required','max:255'],
+            'body' => ['required'],
+        ]);
+
+        Auth::user()->posts()->create($fields);
+
+        return back()->with('success', 'Post created successfully');
     }
 
     /**
@@ -54,7 +65,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
         //
     }

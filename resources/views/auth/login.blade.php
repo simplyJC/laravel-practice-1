@@ -28,7 +28,7 @@
             <div class="mb-4">
                 <label for="remember" class="inline-flex items-center">
                     <input type="checkbox" name="remember" id="remember" class="rounded border-gray-200 text-blue-600 shadow-sm" />
-                    <span class="ml-2 text-sm text-gray-600">Login</span>
+                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
             @error('failed')

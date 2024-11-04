@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -45,4 +46,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * This code defines a relationship between the User model and the Post model. It states that a user can have many posts, establishing a one-to-many relationship. The hasMany method is a part of Eloquent, Laravel's ORM (Object-Relational Mapping) system, which allows you to define relationships between models.This relationship is defined in the User model, as seen in the context of app/Models/User.php:posts.
+     */
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+  
 }
