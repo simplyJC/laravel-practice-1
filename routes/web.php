@@ -27,3 +27,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
+
+
