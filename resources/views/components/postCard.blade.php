@@ -18,4 +18,8 @@
             <a href="{{route('posts.show', $post)}}" class="text-blue-500 hover:text-blue-700">Read More &rarr;</a>
         @endif
        
+
+    <div class="text-red-500  flex items-center justify-end gap-4 mt-6">
+        {{ $slot }}
+    </div>
  </div>

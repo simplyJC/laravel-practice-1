@@ -14,6 +14,8 @@
             {{--Create a Post Form --}}
             @if (session('success'))            
                      <x-flashMessage message="{{session('success')}}" bg_color="bg-green-500"/> 
+                     @elseif (session('delete'))
+                     <x-flashMessage message="{{session('delete')}}" bg_color="bg-red-500"/>
             @endif
             <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -48,7 +50,18 @@
                 </div>
                 <p class="text-gray-600">{{Str::words($post->body, 15)}}</p>
             </div> --}}
-            <x-postCard :post="$post"/>
+            <x-postCard :post="$post"> 
+                {{--edit--}}
+                <a href="{{route('posts.edit', $post)}}" class="text-blue-500 hover:text-blue-700">Edit</a>
+
+                {{--delete--}}     
+               
+               <form  action="{{route('posts.destroy', $post)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+            </form>
+            </x-postCard>
             @endforeach
         </div>
          <div>
