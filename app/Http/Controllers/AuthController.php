@@ -6,6 +6,9 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use  App\Events\UserSubscribed;
 class AuthController extends Controller
 {
     //
@@ -21,10 +24,34 @@ class AuthController extends Controller
         //Login
         Auth::login($user);
 
-        return redirect()->intended('dashboard');
+        //Trigger must-verify-email event
+        event( new Registered($user));
+        
+        if($request->subscribe){
+            event(new UserSubscribed($user));
+        }
+
+        //return redirect()->intended('dashboard');
+
+        return redirect()->route('dashboard');
        // dd('ok' );
     }
-
+    //Verify Email Notice handler
+    public function verifyNotice() {
+        return view('auth.verify-email');
+    }
+    //Verify Email
+     public function verifyEmail(EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect()->route('dashboard');
+        
+    }
+    //Resend Verification Email
+    public function resendVerificationEmail(Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('message', 'Verification link sent!');
+    }
+    //Login
     public function login (Request $request) {
         $fields = $request -> validate([
             'email' => ['required','max:255', 'email'],

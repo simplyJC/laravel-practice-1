@@ -13,6 +13,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
+use App\Events\UserSubscribed;
 
 
 class PostController extends Controller implements HasMiddleware
@@ -20,7 +21,7 @@ class PostController extends Controller implements HasMiddleware
     public static  function  middleware(): array
     {
         return [
-            new  Middleware('auth', except: ['index', 'show']),
+            new  Middleware(['auth', 'verified'], except: ['index', 'show']),
         ];
     }
     /**
@@ -28,7 +29,7 @@ class PostController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        
+        //event (new  UserSubscribed('Jaycee'));
         //
         $posts = Post::latest()->paginate(5);
         // dd($posts);
