@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 
 
 class PostController extends Controller implements HasMiddleware
@@ -26,6 +28,7 @@ class PostController extends Controller implements HasMiddleware
      */
     public function index()
     {
+        
         //
         $posts = Post::latest()->paginate(5);
         // dd($posts);
@@ -61,11 +64,15 @@ class PostController extends Controller implements HasMiddleware
             $path = Storage::disk('public')->put('post_images', $request->image);
 
         }
-        Auth::user()->posts()->create([
+        $post = Auth::user()->posts()->create([
             'title' => $request->title,
             'body' => $request->body,
             'image' => $path,
         ]);
+
+        //Send Email
+        Mail::to(Auth::user())->send(new WelcomeMail(Auth::user(),  $post));
+        
 
         return back()->with('success', 'Post created successfully');
     }
